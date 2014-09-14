@@ -101,6 +101,7 @@ Available plugins
 You can create environments for the following programming languages:
 
 * [erlang](http://erlang.org/)
+* [ruby](https://www.ruby-lang.org/)
 * [rust](http://rust-lang.org/)
 * [elixir](http://elixir-lang.org/)
 * [julia](http://julialang.org/)
@@ -130,6 +131,7 @@ julia
 node
 node-prebuilt
 python
+ruby-prebuilt
 rust
 rust-prebuilt
 scala

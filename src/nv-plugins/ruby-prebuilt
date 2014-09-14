@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+RUBY_PREBUILT_INDEX=https://raw.githubusercontent.com/wayneeseguin/rvm/master/config/remote
+
+# Output lists of versions
+plug_list_versions() {
+    local arch=$(nv_get_system_arch "i686" "x86_64")
+    local system=$(nv_get_system "linux" "osx")
+    if [ $system = "linux" ]; then
+        system=$(nv_get_system_vendor)
+    fi
+    curl -s $RUBY_PREBUILT_INDEX | \
+        grep ".*/${system}/.*/${arch}/" | sed -e 's@.*/ruby-\(.*\).tar.bz2@\1@' | \
+        sort --version-sort | uniq
+}
+
+# Return full url for tarball
+plug_url_for_download() {
+    local version=$1
+    local arch=$(nv_get_system_arch "i686" "x86_64")
+    local system=$(nv_get_system "linux" "osx")
+    if [ $system = "linux" ]; then
+        system=$(nv_get_system_vendor)
+    fi
+    curl -s $RUBY_PREBUILT_INDEX | \
+        grep ".*/${system}/.*/${arch}/ruby-${version}.tar.bz2" | head -n1
+}
+
+# Like we build
+plug_build() {
+    local src_path=$1
+    local build_path=$2
+    cp -r "$src_path"/*/* "$build_path"
+}
