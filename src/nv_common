@@ -224,6 +224,10 @@ nv_get_first_non_opt_value() {
     echo "$res"
 }
 
+nv_get_system_vendor() {
+    awk '/^ID=/ { sub("ID=",""); print $0 }' /etc/os-release
+}
+
 nv_get_system_arch() {
     local x32=$1
     local x64=$2
