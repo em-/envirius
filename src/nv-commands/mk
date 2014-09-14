@@ -246,7 +246,7 @@ plug_install_default() {
                 if [ "`nv_is_function 'plug_unpack'`" = "yes" ]; then
                     plug_unpack $tarball $src_path
                 else
-                    tar -xzf "$tarball" -C "$src_path"
+                    tar -xaf "$tarball" -C "$src_path"
                 fi
             fi
 
